@@ -18,9 +18,9 @@ namespace Live.Api.TaskService
 
         public async Task HandleCommand(CreateTaskCm createTaskCm)
         {
-            var task = new MyTask(TaskId.Create(createTaskCm.taskId));
+            var task = new MyTask(TaskId.Create(createTaskCm.TaskId));
 
-            task.SetName(TaskName.Create(createTaskCm.name));
+            task.SetName(TaskName.Create(createTaskCm.Name));
 
             await _taskRepository.CreateAsync(task);
         }

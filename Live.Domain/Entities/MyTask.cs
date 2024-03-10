@@ -1,4 +1,6 @@
 ﻿using Live.Domain.ValueObjets.Task;
+using System.Diagnostics.Tracing;
+using System.Text.Json.Serialization;
 
 
 namespace Live.Domain.Entities
@@ -15,9 +17,9 @@ namespace Live.Domain.Entities
 
         public string? Status { get; set; }
 
-        public int? UserId { get; set; }
+        public Guid? UserId { get; set; }
 
-        public int? TaskTypeId { get; set; }
+        public Guid? TaskTypeId { get; set; }
 
         public virtual TaskType? TaskType { get; set; }
 
@@ -27,6 +29,7 @@ namespace Live.Domain.Entities
         {
             this.TaskId = taskId;
         }
+
 
         public void SetName(TaskName name)
         {

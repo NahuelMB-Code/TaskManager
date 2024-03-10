@@ -15,6 +15,8 @@ namespace Live.Domain.ValueObjets.Task
             Name = value;
         }
 
+        private TaskName() { }
+
         public static TaskName Create(string value)
         {
             Validate(value);

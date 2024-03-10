@@ -10,8 +10,8 @@ namespace Live.Domain.Repositories
 {
     public interface ITaskRepository
     {
-        Task<MyTask> GetTaskById(TaskId Id);
+        Task<Entities.MyTask> GetTaskById(TaskId Id);
 
-        Task CreateAsync(MyTask task);
+        System.Threading.Tasks.Task CreateAsync(Entities.MyTask task);
     }
 }

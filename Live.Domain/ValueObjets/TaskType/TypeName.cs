@@ -11,6 +11,7 @@ namespace Live.Domain.ValueObjets.TaskType
     {
         public string Name { get; init; } // init quiere decir que no se setea publicamente
 
+        private TypeName () { }
         internal TypeName(string value)
         {
             Name = value;

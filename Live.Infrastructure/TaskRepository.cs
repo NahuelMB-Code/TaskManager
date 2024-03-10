@@ -1,12 +1,6 @@
 ﻿using Live.Domain.Entities;
 using Live.Domain.Repositories;
 using Live.Domain.ValueObjets.Task;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Live.Infrastructure
@@ -26,7 +20,9 @@ namespace Live.Infrastructure
 
         public async Task<MyTask> GetTaskById(TaskId Id)
         {
+
              return await _db.Tasks.FindAsync((Guid)Id);
+          
         }
     }
 }

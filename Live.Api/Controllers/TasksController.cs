@@ -35,11 +35,12 @@ namespace Live.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> post(CreateTaskCm createTaskCm)
+        public async Task<IActionResult> post([FromBody] CreateTaskCm createTaskCm)
         {
 
             try
             {
+                
                 await _taskService.HandleCommand(createTaskCm);
 
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = createTaskCm });

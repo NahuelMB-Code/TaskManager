@@ -12,11 +12,12 @@ namespace Live.Api.Queries
             _taskRepository = taskRepository;
         }
 
-        public Task<MyTask> GetTaskByIdAsync(Guid id)
+        public async Task<MyTask> GetTaskByIdAsync(Guid id)
         {
             var response = _taskRepository.GetTaskById(TaskId.Create(id));
 
-            return Task.FromResult(response.Result);
+            return await response;
         }
+ 
     }
 }

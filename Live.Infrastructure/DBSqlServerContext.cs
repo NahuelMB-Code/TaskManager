@@ -1,4 +1,5 @@
 ﻿using Live.Domain.Entities;
+using Live.Domain.ValueObjets.Task;
 using Microsoft.EntityFrameworkCore;
 using MyTask = Live.Domain.Entities.MyTask;
 namespace Live.Infrastructure
@@ -30,12 +31,12 @@ namespace Live.Infrastructure
             /* 
              * Se realiza un mapeo con el propósito de evitar que la lógica del objeto de valor interfiera con las propiedades definidas en la base de datos. 
              */
-            modelBuilder.Entity<MyTask>().OwnsOne(o => o.TaskName, conf =>
-            {
-                conf.Property(x => x.Name).HasColumnName("TaskName");
-            });
+            //modelBuilder.Entity<MyTask>().OwnsOne(o => o.TaskName, conf =>
+            //{
+            //    conf.Property(x => x.Name).HasColumnName("TaskName").HasMaxLength(100);
+            //});
 
-
+            modelBuilder.Entity<MyTask>().Ignore(t => t.TaskName);
 
             modelBuilder.Entity<MyTask>(entity =>
             {
@@ -48,9 +49,15 @@ namespace Live.Infrastructure
                     .HasMaxLength(20)
                     .HasDefaultValue("Pending");
 
-                entity.Property(e => e.TaskName).HasMaxLength(100);
+                entity.OwnsOne(o => o.TaskName, conf =>
+                {
+                    conf.Property(x => x.Name).HasColumnName("TaskName").HasMaxLength(100);
+                });
+
+                // entity.Property(e => e.TaskName).HasMaxLength(100);
 
                 entity.Property(e => e.TaskTypeId).HasColumnName("TaskTypeID");
+
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.TaskType).WithMany(p => p.Tasks)
@@ -62,7 +69,8 @@ namespace Live.Infrastructure
                     .HasConstraintName("FK__Tasks__UserID__3C69FB99");
             });
 
-          
+
+            modelBuilder.Entity<TaskType>().Ignore(t => t.TypeName);
 
             modelBuilder.Entity<TaskType>(entity =>
             {
@@ -71,7 +79,14 @@ namespace Live.Infrastructure
                 entity.Property(e => e.TaskTypeId)
                     .ValueGeneratedNever()
                     .HasColumnName("TaskTypeID");
-                entity.Property(e => e.TypeName).HasMaxLength(50);
+
+
+                // entity.Property(e => e.TypeName).HasMaxLength(50);
+
+                entity.OwnsOne(o => o.TypeName, conf =>
+                {
+                    conf.Property(x => x.Name).HasColumnName("TypeName").HasMaxLength(50);
+                });
             });
 
             modelBuilder.Entity<User>(entity =>
