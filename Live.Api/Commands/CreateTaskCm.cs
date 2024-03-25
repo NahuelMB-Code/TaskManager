@@ -1,4 +1,4 @@
 ﻿namespace Live.Api.Commands
 {
-    public record CreateTaskCm(Guid TaskId, string Name);
+    public record CreateTaskCm<T>(T TaskId, string Name);
 }

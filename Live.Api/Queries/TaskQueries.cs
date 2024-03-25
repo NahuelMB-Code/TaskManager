@@ -4,17 +4,17 @@ using Live.Domain.ValueObjets.Task;
 
 namespace Live.Api.Queries
 {
-    public class TaskQueries
+    public class TaskQueries<T>
     {
-        readonly private ITaskRepository _taskRepository;
-        public TaskQueries(ITaskRepository taskRepository) 
+        readonly private ITaskRepository<T> _taskRepository;
+        public TaskQueries(ITaskRepository<T> taskRepository) 
         {
             _taskRepository = taskRepository;
         }
 
-        public async Task<MyTask> GetTaskByIdAsync(Guid id)
+        public async Task<MyTask<T>> GetTaskByIdAsync(T id)
         {
-            var response = _taskRepository.GetTaskById(TaskId.Create(id));
+            var response = _taskRepository.GetTaskById(TaskId<T>.Create(id));
 
             return await response;
         }

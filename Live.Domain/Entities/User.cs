@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Live.Domain.Entities
 {
-    public partial class User
+    public partial class User<T>
     {
-        public Guid UserId { get; set; }
+        public required T UserId { get; set; }
 
         public string UserName { get; set; } = null!;
 
         public string Email { get; set; } = null!;
 
         [JsonIgnore]
-        public virtual ICollection<MyTask> Tasks { get; set; } = new List<MyTask>();
+        public virtual ICollection<MyTask<T>> Tasks { get; set; } = new List<MyTask<T>>();
     }
 }

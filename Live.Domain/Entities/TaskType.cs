@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Live.Domain.Entities
 {
-    public partial class TaskType
+    public partial class TaskType<T>
     {
-        public Guid TaskTypeId { get; set; }
+        public required T TaskTypeId { get; set; }
 
         public TypeName TypeName { get; set; } = null!;
 
         [JsonIgnore]
-        public virtual ICollection<MyTask> Tasks { get; set; } = new List<MyTask>();
+        public virtual ICollection<MyTask<T>> Tasks { get; set; } = new List<MyTask<T>>();
     }
 }

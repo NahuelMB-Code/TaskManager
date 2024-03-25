@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Live.Domain.Repositories
 {
-    public interface ITaskRepository
+    public interface ITaskRepository<T>
     {
-        Task<Entities.MyTask> GetTaskById(TaskId Id);
+        Task<MyTask<T>> GetTaskById(TaskId<T> Id);
 
-        System.Threading.Tasks.Task CreateAsync(Entities.MyTask task);
+        Task CreateAsync(MyTask <T> task);
     }
 }

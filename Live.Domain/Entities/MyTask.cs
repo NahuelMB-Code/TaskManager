@@ -5,30 +5,31 @@ using System.Text.Json.Serialization;
 
 namespace Live.Domain.Entities
 {
-    public partial class MyTask
+    public partial class MyTask<T>
     {
-        public Guid TaskId { get; set; }
+        public T TaskId { get; set; }
 
         public TaskName TaskName { get; set; } = null!;
-
         public string? Description { get; set; }
 
         public DateOnly? DueDate { get; set; }
 
         public string? Status { get; set; }
 
-        public Guid? UserId { get; set; }
+        public T? UserId { get; set; }
 
-        public Guid? TaskTypeId { get; set; }
+        public T? TaskTypeId { get; set; }
 
-        public virtual TaskType? TaskType { get; set; }
+        public virtual TaskType<T>? TaskType { get; set; }
 
-        public virtual User? User { get; set; }
+        public virtual User<T>? User { get; set; }
 
-        public MyTask(Guid taskId)
+        public MyTask(T taskId)
         {
             this.TaskId = taskId;
         }
+
+        public MyTask() { }
 
 
         public void SetName(TaskName name)

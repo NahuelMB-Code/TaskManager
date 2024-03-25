@@ -1,7 +1,5 @@
 ﻿using Live.Domain.Entities;
-using Live.Domain.ValueObjets.Task;
 using Microsoft.EntityFrameworkCore;
-using MyTask = Live.Domain.Entities.MyTask;
 namespace Live.Infrastructure
 {
     public partial class DBSqlServerContext: DbContext
@@ -15,11 +13,11 @@ namespace Live.Infrastructure
         {
         }
 
-        public virtual DbSet<MyTask> Tasks { get; set; }
+        public virtual DbSet<MyTask<Guid>> Tasks { get; set; }
 
-        public virtual DbSet<TaskType> TaskTypes { get; set; }
+        public virtual DbSet<TaskType<Guid>> TaskTypes { get; set; }
 
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User<Guid>> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,9 +34,9 @@ namespace Live.Infrastructure
             //    conf.Property(x => x.Name).HasColumnName("TaskName").HasMaxLength(100);
             //});
 
-            modelBuilder.Entity<MyTask>().Ignore(t => t.TaskName);
+            modelBuilder.Entity<MyTask<Guid>>().Ignore(t => t.TaskName);
 
-            modelBuilder.Entity<MyTask>(entity =>
+            modelBuilder.Entity<MyTask<Guid>>(entity =>
             {
                 entity.HasKey(e => e.TaskId).HasName("PK__Tasks__7C6949D1492D95B8");
 
@@ -70,9 +68,9 @@ namespace Live.Infrastructure
             });
 
 
-            modelBuilder.Entity<TaskType>().Ignore(t => t.TypeName);
+            modelBuilder.Entity<TaskType<Guid>>().Ignore(t => t.TypeName);
 
-            modelBuilder.Entity<TaskType>(entity =>
+            modelBuilder.Entity<TaskType<Guid>>(entity =>
             {
                 entity.HasKey(e => e.TaskTypeId).HasName("PK__TaskType__66B23E53D5A98904");
 
@@ -89,7 +87,7 @@ namespace Live.Infrastructure
                 });
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<User<Guid>>(entity =>
             {
                 entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC392E5F29");
 

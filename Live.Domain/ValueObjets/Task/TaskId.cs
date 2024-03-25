@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Live.Domain.ValueObjets.Task
 {
-    public record TaskId
+    public record TaskId<T>
     {
-        public Guid Value { get; init; } // init quiere decir que no se setea publicamente
+        public T Value { get; init; } // init quiere decir que no se setea publicamente
 
-        internal TaskId(Guid value)
+        internal TaskId(T value)
         {
             Value = value;
         }
 
-        public static TaskId Create(Guid value)
+        public static TaskId<T> Create(T value)
         {
-            return new TaskId(value);
+            return new TaskId<T>(value);
         }
 
 
-        public static implicit operator Guid(TaskId taskId)
+        public static implicit operator T(TaskId<T> taskId)
         {
             return taskId.Value;
         }

@@ -3,6 +3,7 @@ using Live.Api.Commands;
 using Live.Api.TaskService;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Live.Api.Controllers
 {
@@ -10,9 +11,9 @@ namespace Live.Api.Controllers
     [Route("api/[controller]")]
     public class TasksController : Controller
     {
-        private readonly TaskServices _taskService; 
+        private readonly TaskServices<Guid> _taskService; 
 
-        public TasksController(TaskServices taskService)
+        public TasksController(TaskServices<Guid> taskService)
         {
             _taskService = taskService;
         }
@@ -35,7 +36,7 @@ namespace Live.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> post([FromBody] CreateTaskCm createTaskCm)
+        public async Task<IActionResult> post([FromBody] CreateTaskCm<Guid> createTaskCm)
         {
 
             try
